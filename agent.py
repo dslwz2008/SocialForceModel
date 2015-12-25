@@ -50,7 +50,7 @@ class Agent(object):
         dij = np.linalg.norm(self.pos - other.pos)
         nij = (self.pos - other.pos)/dij
         first = (self.A*np.exp((rij-dij)/self.B) + self.bodyFactor*g(rij-dij))*nij
-        tij = np.array(-nij[1],nij[0])
+        tij = np.array([-nij[1],nij[0]])
         deltaVij = (self.actualV - other.actualV)*tij
         second = self.slideFricFactor*g(rij-dij)*deltaVij*tij
         return first + second
@@ -59,6 +59,6 @@ class Agent(object):
         ri = self.radius
         diw,niw = distanceP2W(self.pos,wall)
         first = (self.A*np.exp((ri-diw)/self.B) + self.bodyFactor*g(ri-diw))*niw
-        tiw = np.array(-niw[1],niw[0])
+        tiw = np.array([-niw[1],niw[0]])
         second = self.slideFricFactor*g(ri-diw)*(self.actualV*tiw)*tiw
         return first - second

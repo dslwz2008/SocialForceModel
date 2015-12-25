@@ -59,7 +59,8 @@ while running:
         pygame.draw.line(screen, LINECOLOR,startPx,endPx)
 
     # draw agents
-    pygame.draw.circle(screen, AGENTCOLOR, [400,300], AGENTSIZE, AGENTSICKNESS)
+    pygame.draw.circle(screen, AGENTCOLOR, (np.array(SCREENSIZE)/2).tolist(),
+                       AGENTSIZE, AGENTSICKNESS)
 
     # 计算相互作用力
     for idxi,ai in enumerate(agents):

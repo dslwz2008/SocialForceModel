@@ -43,18 +43,19 @@ def distanceP2W(point, wall):
     p1 = np.array([wall[2],wall[3]])
     d = p1-p0
     ymp0 = point-p0
-    t = np.dot(d,ymp0)
-    dDd = np.dot(d,d)
+    t = np.dot(d,ymp0)/np.dot(d,d)
     if t <= 0.0:
-        sqdist = np.dot(ymp0,ymp0)
-    elif t >= dDd:
+        dist = np.sqrt(np.dot(ymp0,ymp0))
+        cross = p0 + t*d
+    elif t >= 1.0:
         ymp1 = point-p1
-        sqdist = np.dot(ymp1,ymp1)
+        dist = np.sqrt(np.dot(ymp1,ymp1))
+        cross = p0 + t*d
     else:
-        sqdist = np.dot(ymp0,ymp0) - t*t/dDd
-    cross = p0 + t*d
+        cross = p0 + t*d
+        dist = np.linalg.norm(cross-point)
     npw = normalize(cross-point)
-    return np.sqrt(sqdist),npw
+    return dist,npw
 
 if __name__ == '__main__':
     # v1 = np.array([3.33,3.33])
